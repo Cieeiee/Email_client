@@ -1,59 +1,58 @@
 #include <unistd.h> 
 #ifndef _TOOLS_H_ 
 #define _TOOLS_H_ 
-#define IPSTR_SMTP "220.181.12.12"
+#define IPSTR_SMTP "123.126.97.5"
 #define SOCKET_ERROR -1
 
 char buffer[1024];
 int sockfd,ret;
 char const *send_data;
 
-int connectHost(const char *addr, const char *ipstr, int port) {
+int connectHost(const char *domain, int port) {
     struct sockaddr_in servaddr;
     if((sockfd = socket(AF_INET,SOCK_STREAM,0)) < 0) {
-        perror("socket()");
-        exit(EXIT_FAILURE);
+        perror("socket");
+        return -1;
     }
     bzero(&servaddr,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(port);
     
-    if(inet_pton(AF_INET, ipstr, &servaddr.sin_addr) < 0) {
-        perror("inet_pton()");
-        exit(EXIT_FAILURE);
+    if(inet_pton(AF_INET, inet_ntoa(*(struct in_addr*)gethostbyname(domain)->h_addr_list[0]), &servaddr.sin_addr) < 0) {
+      perror("inet_pton");
+      return -1;
     }
 
-    if (connect(sockfd,(struct sockaddr *)&servaddr,sizeof(servaddr)) < 0) {
-        perror("connect()");
-        exit(EXIT_FAILURE);
+    if (connect(sockfd,(struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
+      perror("connect");
+      return -1;
     }
 
     memset(buffer, 0, sizeof(buffer));
 
     if(recv(sockfd, buffer, sizeof(buffer), 0) < 0) {
-        perror("recv()");
-        exit(EXIT_FAILURE);
+      perror("recv");
+      return -1;
     }
-    return sockfd;    
+    return 0;
 }
 
-int getResponse(){    
-    memset(buffer,0,sizeof(buffer));
-    if((ret = recv(sockfd, buffer, 1024, 0)) == SOCKET_ERROR) {
-        perror("recv()");
-        exit(EXIT_FAILURE);
-    }
-    buffer[ret]='\0';
-     
-    if(*buffer == '5') {
-        printf("the order is not support smtp host，%s\n ",buffer);
-        exit(EXIT_FAILURE);
-    }else if (*buffer == '-') {
-        printf("the order is not support pop host，%s\n ",buffer);
-        exit(EXIT_FAILURE);
-    }
-    //printf("%s\n", buffer);
-    return 0;
+int getResponse() {
+  memset(buffer, 0, sizeof(buffer));
+  if((ret = recv(sockfd, buffer, 1024, 0)) == SOCKET_ERROR) {
+      perror("recv");
+      return -1;
+  }
+  buffer[ret]='\0';
+  if(*buffer == '5') {
+      printf("the order is not support smtp host，%s\n ",buffer);
+      return -1;
+  } else if (*buffer == '-') {
+      printf("the order is not support pop host，%s\n ",buffer);
+      return -1;
+  }
+//  printf("%s\n", buffer);
+  return 0;
 }
 
 int login(char* username,char* password){
@@ -103,7 +102,7 @@ int login(char* username,char* password){
  
 }
 
-void watch_help(){
+void watch_help() {
 	//查看帮助
 	printf("---------------欢迎查看帮助文档---------------\n");
     printf("            email inbox进入收件箱\n");
@@ -112,16 +111,17 @@ void watch_help(){
     printf("            email send 目标邮箱 发送邮件\n");
 }
 
-void getNamePasswd(char name[],char passwd[]){
-    FILE* fp = fopen("email.conf","r");
-    if (fp != NULL){
-        //配置文件存在,从配置文件中读取base64加密过的用户名密码
-        fscanf(fp,"%s\n%s",name,passwd);
-    }else{
-        //配置文件不存在，进入配置模块
-        printf("请先设定用户和密码--email setuser\n");
-        exit(0);
-    }
+int getNamePasswd(char name[], char passwd[]) {
+  FILE* fp = fopen("email.conf","r");
+  if (fp != NULL) {
+      //配置文件存在,从配置文件中读取base64加密过的用户名密码
+      fscanf(fp, "%s\n%s", name, passwd);
+  } else {
+      //配置文件不存在，进入配置模块
+      printf("请先设定用户和密码--email setuser\n");
+      return -1;
+  }
+  return 0;
 }
 
 const char base[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
