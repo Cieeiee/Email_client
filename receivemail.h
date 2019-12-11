@@ -5,6 +5,7 @@
 char imap_server[56]="imap.163.com";
 
 int watch_inbox() {
+  FILE* file = fopen("email.log", "a");
 	//连接服务器,参数，服务器地址，ip地址，端口号
 	if(connectHost(imap_server, 143) < 0) {
 	  exit(EXIT_FAILURE);
@@ -18,8 +19,10 @@ int watch_inbox() {
   }
 
   sprintf(ch, "a001 LOGIN %s %s\r\n", base64_decode(name), base64_decode(passwd));
-  if(send(sockfd, (char *)ch, strlen(ch),0) == SOCKET_ERROR) {
-    perror("login");
+  ret = send(sockfd, (char *)ch, strlen(ch),0);
+  fprintf(file, "%s %s - send LOGIN: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret == SOCKET_ERROR) {
+    perror("send LOGIN");
     exit(EXIT_FAILURE);
   }
 
@@ -28,8 +31,10 @@ int watch_inbox() {
   }
 
   sprintf(ch, "a002 SELECT INBOX\r\n");
-  if(send(sockfd, (char *)ch, strlen(ch),0) == SOCKET_ERROR) {
-    perror("select inbox");
+  ret = send(sockfd, (char *)ch, strlen(ch),0);
+  fprintf(file, "%s %s - send SELECT INBOX: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret == SOCKET_ERROR) {
+    perror("send SELECT INBOX");
     exit(EXIT_FAILURE);
   }
 
@@ -49,7 +54,10 @@ int watch_inbox() {
   int i;
   for (i = 0; i < total; ++i) {
     sprintf(ch, "a003 fetch %d FLAGS(SEEN)\r\n", i + 1);
-    if (send(sockfd, (char *)ch, strlen(ch), 0) == SOCKET_ERROR) {
+    ret = send(sockfd, (char *)ch, strlen(ch), 0);
+    fprintf(file, "%s %s - send FETCH FLAGS: %s\n", currentTime(), __func__, strerror(errno));
+    if (ret == SOCKET_ERROR) {
+      perror("send FETCH FLAGS");
       exit(EXIT_FAILURE);
     }
     if(getResponse() < 0) {
@@ -66,8 +74,10 @@ int watch_inbox() {
     printf("第%d封邮件 %s):\n", i + 1, q);
 
     sprintf(ch, "a003 fetch %d BODY[HEADER.FIELDS (DATE FROM TO SUBJECT)]\r\n",i+1);
-    if (send(sockfd, (char *)ch, strlen(ch),0) == SOCKET_ERROR) {
-      perror("send");
+    ret = send(sockfd, (char *)ch, strlen(ch),0);
+    fprintf(file, "%s %s - send FETCH BODY HEADER: %s\n", currentTime(), __func__, strerror(errno));
+    if (ret == SOCKET_ERROR) {
+      perror("send FETCH BODY HEADER");
       exit(EXIT_FAILURE);
     }
     if(getResponse() < 0) {
@@ -84,7 +94,10 @@ int watch_inbox() {
     printf("%s\n",q);
 
     sprintf(ch, "a003 fetch %d BODY[1]\r\n", i + 1);
-    if (send(sockfd, (char *)ch, strlen(ch),0) == SOCKET_ERROR) {
+    ret = send(sockfd, (char *)ch, strlen(ch),0);
+    fprintf(file, "%s %s - send FETCH BODY: %s\n", currentTime(), __func__, strerror(errno));
+    if (ret == SOCKET_ERROR) {
+      perror("send FETCH BODY");
       exit(EXIT_FAILURE);
     }
     if(getResponse() < 0) {
@@ -111,8 +124,9 @@ int watch_inbox() {
 			scanf("%d",&delete_i);
 		}
 		sprintf(ch, "a004 STORE %d +flags (\\Deleted)\r\n",delete_i);
+    fprintf(file, "%s %s - send DELETE FLAG: %s\n", currentTime(), __func__, strerror(errno));
 		if (send(sockfd, (char *)ch, strlen(ch),0) == SOCKET_ERROR) {
-		  perror("send");
+		  perror("send DELETE FLAG");
 			exit(EXIT_FAILURE);
 		}
 		if(getResponse() < 0) {

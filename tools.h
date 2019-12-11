@@ -1,105 +1,142 @@
-#include <unistd.h> 
+#include <unistd.h>
+#include <errno.h>
+#include <time.h>
 #ifndef _TOOLS_H_ 
-#define _TOOLS_H_ 
-#define IPSTR_SMTP "123.126.97.5"
+#define _TOOLS_H_
 #define SOCKET_ERROR -1
 
+extern int errno;
 char buffer[1024];
-int sockfd,ret;
+int sockfd, ret;
 char const *send_data;
 
+char* currentTime() {
+  static char time_str[100];
+  time_t time1;
+  struct tm *tmp_ptr = NULL;
+  time(&time1);
+  tmp_ptr = localtime(&time1);
+  sprintf(time_str, "%d-%02d-%02d %02d:%02d:%02d ",
+          tmp_ptr->tm_year + 1900, tmp_ptr->tm_mon + 1, tmp_ptr->tm_mday,
+          tmp_ptr->tm_hour, tmp_ptr->tm_min, tmp_ptr->tm_sec);
+  return time_str;
+}
+
 int connectHost(const char *domain, int port) {
-    struct sockaddr_in servaddr;
-    if((sockfd = socket(AF_INET,SOCK_STREAM,0)) < 0) {
-        perror("socket");
-        return -1;
-    }
-    bzero(&servaddr,sizeof(servaddr));
-    servaddr.sin_family = AF_INET;
-    servaddr.sin_port = htons(port);
-    
-    if(inet_pton(AF_INET, inet_ntoa(*(struct in_addr*)gethostbyname(domain)->h_addr_list[0]), &servaddr.sin_addr) < 0) {
-      perror("inet_pton");
+  FILE* file = fopen("email.log", "a");
+  struct sockaddr_in servaddr;
+  sockfd = socket(AF_INET,SOCK_STREAM,0);
+  fprintf(file, "%s %s - socket: %s\n", currentTime(), __func__, strerror(errno));
+  if(sockfd < 0) {
+      perror("socket");
       return -1;
-    }
+  }
 
-    if (connect(sockfd,(struct sockaddr *)&servaddr, sizeof(servaddr)) < 0) {
-      perror("connect");
-      return -1;
-    }
+  bzero(&servaddr,sizeof(servaddr));
+  servaddr.sin_family = AF_INET;
+  servaddr.sin_port = htons(port);
 
-    memset(buffer, 0, sizeof(buffer));
+  ret = inet_pton(AF_INET, inet_ntoa(*(struct in_addr*)gethostbyname(domain)->h_addr_list[0]), &servaddr.sin_addr);
+  fprintf(file, "%s %s - inet_pton: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret < 0) {
+    perror("inet_pton");
+    return -1;
+  }
 
-    if(recv(sockfd, buffer, sizeof(buffer), 0) < 0) {
-      perror("recv");
-      return -1;
-    }
-    return 0;
+  ret = connect(sockfd,(struct sockaddr *)&servaddr, sizeof(servaddr));
+  fprintf(file, "%s %s - connect: %s\n", currentTime(), __func__, strerror(errno));
+  if (ret < 0) {
+    perror("connect");
+    return -1;
+  }
+
+  memset(buffer, 0, sizeof(buffer));
+
+  ret = recv(sockfd, buffer, sizeof(buffer), 0);
+  fprintf(file, "%s %s - recv: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret < 0) {
+    perror("recv");
+    return -1;
+  }
+  fclose(file);
+  return 0;
 }
 
 int getResponse() {
+  FILE* file = fopen("email.log", "a");
   memset(buffer, 0, sizeof(buffer));
-  if((ret = recv(sockfd, buffer, 1024, 0)) == SOCKET_ERROR) {
-      perror("recv");
-      return -1;
+  ret = recv(sockfd, buffer, 1024, 0);
+  fprintf(file, "%s %s - recv: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret == SOCKET_ERROR) {
+    perror("recv");
+    return -1;
   }
   buffer[ret]='\0';
   if(*buffer == '5') {
-      printf("the order is not support smtp host，%s\n ",buffer);
-      return -1;
+    printf("the order is not support smtp host，%s\n ",buffer);
+    return -1;
   } else if (*buffer == '-') {
-      printf("the order is not support pop host，%s\n ",buffer);
-      return -1;
+    printf("the order is not support pop host，%s\n ",buffer);
+    return -1;
   }
+  fclose(file);
 //  printf("%s\n", buffer);
   return 0;
 }
 
 int login(char* username,char* password){
-    char ch[100];
-    if(username == "" || password == ""){
-        return -1;
-    }
-     
-    send_data = "HELO 163.com\r\n";
-    ret = send(sockfd, send_data, strlen(send_data), 0);
-    if(ret == SOCKET_ERROR){
-        return -1;
-    }         
-    if(getResponse() < 0){
-        return -1;
-    }
-     
-    send_data = "AUTH LOGIN\r\n";
-    ret = send(sockfd, send_data, strlen(send_data), 0);
-    if(ret == SOCKET_ERROR){
-        return -1;
-    }
-    if(getResponse() < 0){
-        return -1;
-    }
+  FILE* file = fopen("email.log", "a");
+  char ch[100];
+  if(username == "" || password == "") {
+      return -1;
+  }
 
-    sprintf(ch, "%s\r\n", username);
-    ret = send(sockfd, (char *)ch, strlen(ch),0);
-    if(ret == SOCKET_ERROR){
-        return -1;
-    }
-     
-    if(getResponse() < 0){
-         return -1;
-    }
-     
-    sprintf(ch,"%s\r\n",password);
-    ret = send(sockfd,(char *)ch,strlen(ch),0);
-    if(ret == SOCKET_ERROR){
-        return -1;
-    }
-     
-    if(getResponse() < 0){
-        return -1;
-    }
-    return 0;
- 
+  send_data = "HELO 163.com\r\n";
+  ret = send(sockfd, send_data, strlen(send_data), 0);
+  fprintf(file, "%s %s - send HELO: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret == SOCKET_ERROR) {
+    perror("send HELO");
+    return -1;
+  }
+  if(getResponse() < 0) {
+    return -1;
+  }
+
+  send_data = "AUTH LOGIN\r\n";
+  ret = send(sockfd, send_data, strlen(send_data), 0);
+  fprintf(file, "%s %s - send AUTH: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret == SOCKET_ERROR) {
+    perror("send AUTH");
+    return -1;
+  }
+  if(getResponse() < 0) {
+    return -1;
+  }
+
+  sprintf(ch, "%s\r\n", username);
+  ret = send(sockfd, (char *)ch, strlen(ch),0);
+  fprintf(file, "%s %s - send username: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret == SOCKET_ERROR) {
+    perror("send username");
+    return -1;
+  }
+
+  if(getResponse() < 0){
+    return -1;
+  }
+
+  sprintf(ch,"%s\r\n",password);
+  ret = send(sockfd,(char *)ch,strlen(ch),0);
+  fprintf(file, "%s %s - send password: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret == SOCKET_ERROR) {
+    perror("send password");
+    return -1;
+  }
+
+  if(getResponse() < 0){
+    return -1;
+  }
+  return 0;
 }
 
 void watch_help() {
@@ -133,9 +170,9 @@ static char find_pos(char ch){
 }   
   
 /* Base64 解码 */   
-char *base64_decode(const char *data){   
-	int data_len = strlen(data); 
-    int ret_len = (data_len / 4) * 3;   
+char *base64_decode(const char *data){
+  unsigned long data_len = strlen(data);
+  unsigned long ret_len = (data_len / 4) * 3;
     int equal_count = 0;   
     char *ret = NULL;   
     char *f = NULL;   
@@ -152,19 +189,19 @@ char *base64_decode(const char *data){
     if (*(data + data_len - 3) == '='){  
         equal_count += 1;   
     }   
-    switch (equal_count){   
-    case 0:   
-        ret_len += 4;//3 + 1 [1 for NULL]   
-        break;   
-    case 1:   
-        ret_len += 4;//Ceil((6*3)/8)+1   
-        break;   
-    case 2:   
-        ret_len += 3;//Ceil((6*2)/8)+1   
-        break;   
-    case 3:   
-        ret_len += 2;//Ceil((6*1)/8)+1   
-        break;   
+    switch (equal_count) {
+      case 0:
+      case 1:
+          ret_len += 4;//3 + 1 [1 for NULL]
+          break;
+      case 2:
+          ret_len += 3;//Ceil((6*2)/8)+1
+          break;
+      case 3:
+          ret_len += 2;//Ceil((6*1)/8)+1
+          break;
+      default:
+        break;
     }   
     ret = (char *)malloc(ret_len);   
     if (ret == NULL){   
