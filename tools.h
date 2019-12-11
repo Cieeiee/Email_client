@@ -8,51 +8,49 @@ char buffer[1024];
 int sockfd,ret;
 char const *send_data;
 
-int connectHost(const char *addr,const char *ipstr,int port){
+int connectHost(const char *addr, const char *ipstr, int port) {
     struct sockaddr_in servaddr;
-    sockfd = socket(AF_INET,SOCK_STREAM,0);
-    if(sockfd < 0){
-        printf("Create socket error!\n");
-        return -1;
+    if((sockfd = socket(AF_INET,SOCK_STREAM,0)) < 0) {
+        perror("socket()");
+        exit(EXIT_FAILURE);
     }
     bzero(&servaddr,sizeof(servaddr));
     servaddr.sin_family = AF_INET;
     servaddr.sin_port = htons(port);
     
-    if(inet_pton(AF_INET, ipstr, &servaddr.sin_addr) <= 0 ){
-        printf("inet_pton error!\n");
-        return -1;
-    };
-
-    if (connect(sockfd,(struct sockaddr *)&servaddr,sizeof(servaddr)) < 0){
-        printf("Connect failed... \n");
-        return -1;
+    if(inet_pton(AF_INET, ipstr, &servaddr.sin_addr) < 0) {
+        perror("inet_pton()");
+        exit(EXIT_FAILURE);
     }
-     
+
+    if (connect(sockfd,(struct sockaddr *)&servaddr,sizeof(servaddr)) < 0) {
+        perror("connect()");
+        exit(EXIT_FAILURE);
+    }
+
     memset(buffer, 0, sizeof(buffer));
-     
-    if(recv(sockfd, buffer, sizeof(buffer), 0) < 0){    
-        printf("receive failed... \n");
-        return -1;
+
+    if(recv(sockfd, buffer, sizeof(buffer), 0) < 0) {
+        perror("recv()");
+        exit(EXIT_FAILURE);
     }
     return sockfd;    
 }
 
 int getResponse(){    
     memset(buffer,0,sizeof(buffer));
-    ret = recv(sockfd,buffer,1024,0);
-    if(ret == SOCKET_ERROR){
-        printf("receive nothing\n");
-        return -1;
+    if((ret = recv(sockfd, buffer, 1024, 0)) == SOCKET_ERROR) {
+        perror("recv()");
+        exit(EXIT_FAILURE);
     }
     buffer[ret]='\0';
      
-    if(*buffer == '5'){
+    if(*buffer == '5') {
         printf("the order is not support smtp host，%s\n ",buffer);
-        return -1;
-    }else if (*buffer == '-'){
+        exit(EXIT_FAILURE);
+    }else if (*buffer == '-') {
         printf("the order is not support pop host，%s\n ",buffer);
-        return -1;
+        exit(EXIT_FAILURE);
     }
     //printf("%s\n", buffer);
     return 0;
@@ -126,76 +124,7 @@ void getNamePasswd(char name[],char passwd[]){
     }
 }
 
-//设置用户信息
-void setUser(){
-    printf("请输入账号:");
-    char name[100],*passwd;
-    scanf("%s",name);
-    getchar();
-    passwd = getpass("请输入密码:");
-    char* base64_name = base64_encode(name);
-    char* base64_passwd = base64_encode(passwd);
-    FILE* fp = fopen("email.conf","w");
-    fprintf(fp, "%s\n%s",base64_name,base64_passwd);
-    fclose(fp);
-}
-
-
 const char base[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
-
-/* base64 编码 */
-char *base64_encode(const char* data){   
-    int data_len = strlen(data);   
-    int prepare = 0;   
-    int ret_len;   
-    int temp = 0;   
-    char *ret = NULL;   
-    char *f = NULL;   
-    int tmp = 0;   
-    char changed[4];   
-    int i = 0;   
-    ret_len = data_len / 3;   
-    temp = data_len % 3;   
-    if (temp > 0){   
-        ret_len += 1;   
-    }   
-    ret_len = ret_len*4 + 1;   
-    ret = (char *)malloc(ret_len);   
-        
-    if ( ret == NULL){   
-        printf("No enough memory.\n");   
-        exit(0);   
-    }   
-    memset(ret, 0, ret_len);   
-    f = ret;   
-    while (tmp < data_len){   
-        temp = 0;   
-        prepare = 0;   
-        memset(changed, '\0', 4);   
-        while (temp < 3){      
-            if (tmp >= data_len){   
-                break;   
-            }   
-            prepare = ((prepare << 8) | (data[tmp] & 0xFF));   
-            tmp++;   
-            temp++;   
-        }   
-        prepare = (prepare<<((3-temp)*8));      
-        for (i = 0; i < 4 ;i++ ){   
-            if (temp < i){   
-                changed[i] = 0x40;   
-            }else{   
-                changed[i] = (prepare>>((3-i)*6)) & 0x3F;   
-            }   
-            *f = base[changed[i]];   
-            f++; 
-        }   
-    }   
-    *f = '\0';   
-        
-    return ret;   
-        
-}   
 
 /* 转换算子 */   
 static char find_pos(char ch){   
@@ -266,6 +195,74 @@ char *base64_decode(const char *data){
     }   
     *f = '\0';   
     return ret;   
-} 
+}
+
+/* base64 编码 */
+char *base64_encode(const char* data){
+  int data_len = strlen(data);
+  int prepare = 0;
+  int ret_len;
+  int temp = 0;
+  char *ret = NULL;
+  char *f = NULL;
+  int tmp = 0;
+  char changed[4];
+  int i = 0;
+  ret_len = data_len / 3;
+  temp = data_len % 3;
+  if (temp > 0){
+    ret_len += 1;
+  }
+  ret_len = ret_len*4 + 1;
+  ret = (char *)malloc(ret_len);
+
+  if ( ret == NULL){
+    printf("No enough memory.\n");
+    exit(0);
+  }
+  memset(ret, 0, ret_len);
+  f = ret;
+  while (tmp < data_len){
+    temp = 0;
+    prepare = 0;
+    memset(changed, '\0', 4);
+    while (temp < 3){
+      if (tmp >= data_len){
+        break;
+      }
+      prepare = ((prepare << 8) | (data[tmp] & 0xFF));
+      tmp++;
+      temp++;
+    }
+    prepare = (prepare<<((3-temp)*8));
+    for (i = 0; i < 4 ;i++ ){
+      if (temp < i){
+        changed[i] = 0x40;
+      }else{
+        changed[i] = (prepare>>((3-i)*6)) & 0x3F;
+      }
+      *f = base[changed[i]];
+      f++;
+    }
+  }
+  *f = '\0';
+
+  return ret;
+
+}
+
+//设置用户信息
+void setUser(){
+  printf("请输入账号:");
+  char name[100],*passwd;
+  scanf("%s",name);
+  getchar();
+  passwd = getpass("请输入密码:");
+  char* base64_name = base64_encode(name);
+  char* base64_passwd = base64_encode(passwd);
+  FILE* fp = fopen("email.conf","w");
+  fprintf(fp, "%s\n%s",base64_name,base64_passwd);
+  fclose(fp);
+}
 
 #endif
