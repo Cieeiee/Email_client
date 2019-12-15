@@ -12,22 +12,31 @@
 #include "sendmail.h"
 #include "receivemail.h"
 
-int main(int argc, char* argv[]) {
-  if (argc > 1) {
-    if (strcmp(argv[1], "--setuser") == 0)
+int main(int argc,char* argv[]){
+  if (argc == 1) {
+    //如果直接输入mail的话，直接进入收件箱
+    watch_help();
+  } else {
+    //判断mail命令之后的参数
+    if (strcmp(argv[1],"setuser") == 0) {
+      //-user
       setUser();
-    else if (strcmp(argv[1], "--send") == 0) {
-      char *to = argv[2];
-      if (to == NULL) printf("Error: Email address is empty.");
-      else send_mail(to);
-    }
-    else if (strcmp(argv[1], "--inbox") == 0)
+    } else if (strcmp(argv[1],"send") == 0) {
+      //发送邮件,接受参数要发送到的账号
+      char* to = argv[2];
+      if (to == NULL) {
+        printf("地址为空！\n");
+        return -1;
+      }
+      send_mail(to);
+    } else if (strcmp(argv[1],"-h") == 0) {
+      watch_help();
+    } else if (strcmp(argv[1],"inbox") == 0) {
       watch_inbox();
-    else watch_help();
+    } else {
+      printf("输入选项错误，请查看帮助，命令为-h\n");
+      return -1;
+    }
   }
-  else watch_help();
-  SSL_free(ssl);
-  SSL_CTX_free(ctx);
-  X509_free(cert);
   return 0;
 }

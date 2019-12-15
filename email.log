@@ -1,0 +1,444 @@
+2019-12-14 21:11:29  connectHost - socket: Success
+2019-12-14 21:11:29  connectHost - inet_pton: Success
+2019-12-14 21:11:29  connectHost - connect: Success
+2019-12-14 21:11:29  connectHost - recv: Success
+2019-12-14 21:11:29  getResponse - recv: Success
+2019-12-14 21:11:29  getResponse - recv: Success
+2019-12-14 21:11:29  getResponse - recv: Success
+2019-12-14 21:11:29  getResponse - recv: Success
+2019-12-14 21:11:29  getResponse - recv: Success
+2019-12-14 21:12:28  getResponse - recv: Success
+2019-12-14 21:11:29  watch_inbox - send LOGIN: Success
+2019-12-14 21:11:29  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:11:29  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:11:29  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:11:29  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:12:28  watch_inbox - send DELETE FLAG: Success
+2019-12-14 21:12:32  connectHost - socket: Success
+2019-12-14 21:12:32  connectHost - inet_pton: Success
+2019-12-14 21:12:32  connectHost - connect: Success
+2019-12-14 21:12:32  connectHost - recv: Success
+2019-12-14 21:12:32  getResponse - recv: Success
+2019-12-14 21:12:32  getResponse - recv: Success
+2019-12-14 21:12:32  watch_inbox - send LOGIN: Success
+2019-12-14 21:12:32  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:13:21  connectHost - socket: Success
+2019-12-14 21:13:21  connectHost - inet_pton: Success
+2019-12-14 21:13:21  connectHost - connect: Success
+2019-12-14 21:13:31  connectHost - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  getResponse - recv: Success
+2019-12-14 21:13:31  sendmail - send TO: Success
+2019-12-14 21:13:31  sendmail - send DATA: Success
+2019-12-14 21:13:31  sendmail - send CONTENT: Success
+2019-12-14 21:13:31  sendmail - send QUIT: Success
+2019-12-14 21:13:31  login - send HELO: Success
+2019-12-14 21:13:31  login - send AUTH: Success
+2019-12-14 21:13:31  login - send username: Success
+2019-12-14 21:13:31  login - send password: Success
+2019-12-14 21:14:43  connectHost - socket: Success
+2019-12-14 21:14:43  connectHost - inet_pton: Success
+2019-12-14 21:14:43  connectHost - connect: Success
+2019-12-14 21:14:43  connectHost - recv: Success
+2019-12-14 21:14:43  getResponse - recv: Success
+2019-12-14 21:14:43  getResponse - recv: Success
+2019-12-14 21:14:43  getResponse - recv: Success
+2019-12-14 21:14:43  getResponse - recv: Success
+2019-12-14 21:14:43  getResponse - recv: Success
+2019-12-14 21:14:43  watch_inbox - send LOGIN: Success
+2019-12-14 21:14:43  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:14:43  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:14:43  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:14:43  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:15:39  connectHost - socket: Success
+2019-12-14 21:15:39  connectHost - inet_pton: Success
+2019-12-14 21:15:39  connectHost - connect: Success
+2019-12-14 21:15:39  connectHost - recv: Success
+2019-12-14 21:15:39  getResponse - recv: Success
+2019-12-14 21:15:39  getResponse - recv: Success
+2019-12-14 21:15:39  getResponse - recv: Success
+2019-12-14 21:15:39  getResponse - recv: Success
+2019-12-14 21:15:39  getResponse - recv: Success
+2019-12-14 21:15:39  watch_inbox - send LOGIN: Success
+2019-12-14 21:15:39  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:15:39  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:15:39  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:15:39  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:19:35  connectHost - socket: Success
+2019-12-14 21:19:35  connectHost - inet_pton: Success
+2019-12-14 21:19:35  connectHost - connect: Success
+2019-12-14 21:19:35  connectHost - recv: Success
+2019-12-14 21:19:35  getResponse - recv: Success
+2019-12-14 21:19:35  getResponse - recv: Success
+2019-12-14 21:19:35  getResponse - recv: Success
+2019-12-14 21:19:35  getResponse - recv: Success
+2019-12-14 21:19:35  getResponse - recv: Success
+2019-12-14 21:19:35  watch_inbox - send LOGIN: Success
+2019-12-14 21:19:35  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:19:35  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:19:35  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:19:35  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:21:09  connectHost - socket: Success
+2019-12-14 21:21:09  connectHost - inet_pton: Success
+2019-12-14 21:21:09  connectHost - connect: Success
+2019-12-14 21:21:09  connectHost - recv: Success
+2019-12-14 21:21:10  getResponse - recv: Success
+2019-12-14 21:21:10  getResponse - recv: Success
+2019-12-14 21:21:10  getResponse - recv: Success
+2019-12-14 21:21:10  getResponse - recv: Success
+2019-12-14 21:21:10  getResponse - recv: Success
+2019-12-14 21:21:09  watch_inbox - send LOGIN: Success
+2019-12-14 21:21:10  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:21:10  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:21:10  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:21:10  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:38:11  connectHost - socket: Success
+2019-12-14 21:38:11  connectHost - inet_pton: Success
+2019-12-14 21:38:11  connectHost - connect: Success
+2019-12-14 21:38:11  connectHost - recv: Success
+2019-12-14 21:38:11  getResponse - recv: Success
+2019-12-14 21:38:11  getResponse - recv: Success
+2019-12-14 21:38:11  getResponse - recv: Success
+2019-12-14 21:38:11  getResponse - recv: Success
+2019-12-14 21:38:11  getResponse - recv: Success
+2019-12-14 21:38:11  watch_inbox - send LOGIN: Success
+2019-12-14 21:38:11  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:38:11  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:38:11  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:38:11  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:41:21  connectHost - socket: Success
+2019-12-14 21:41:21  connectHost - inet_pton: Success
+2019-12-14 21:41:21  connectHost - connect: Success
+2019-12-14 21:41:21  connectHost - recv: Success
+2019-12-14 21:41:21  getResponse - recv: Success
+2019-12-14 21:41:21  getResponse - recv: Success
+2019-12-14 21:41:21  getResponse - recv: Success
+2019-12-14 21:41:21  getResponse - recv: Success
+2019-12-14 21:41:21  getResponse - recv: Success
+2019-12-14 21:41:21  watch_inbox - send LOGIN: Success
+2019-12-14 21:41:21  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:41:21  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:41:21  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:41:21  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:49:39  connectHost - socket: Success
+2019-12-14 21:49:39  connectHost - inet_pton: Success
+2019-12-14 21:49:39  connectHost - connect: Success
+2019-12-14 21:49:39  connectHost - recv: Success
+2019-12-14 21:49:39  getResponse - recv: Success
+2019-12-14 21:49:39  getResponse - recv: Success
+2019-12-14 21:49:39  getResponse - recv: Success
+2019-12-14 21:49:39  getResponse - recv: Success
+2019-12-14 21:49:39  getResponse - recv: Success
+2019-12-14 21:49:39  watch_inbox - send LOGIN: Success
+2019-12-14 21:49:39  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:49:39  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:49:39  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:49:39  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:50:11  connectHost - socket: Success
+2019-12-14 21:50:11  connectHost - inet_pton: Success
+2019-12-14 21:50:11  connectHost - connect: Success
+2019-12-14 21:50:11  connectHost - recv: Success
+2019-12-14 21:50:11  getResponse - recv: Success
+2019-12-14 21:50:11  getResponse - recv: Success
+2019-12-14 21:50:11  getResponse - recv: Success
+2019-12-14 21:50:11  getResponse - recv: Success
+2019-12-14 21:50:11  getResponse - recv: Success
+2019-12-14 21:50:11  watch_inbox - send LOGIN: Success
+2019-12-14 21:50:11  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:50:11  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:50:11  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:50:11  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:51:54  connectHost - socket: Success
+2019-12-14 21:51:54  connectHost - inet_pton: Success
+2019-12-14 21:51:54  connectHost - connect: Success
+2019-12-14 21:51:54  connectHost - recv: Success
+2019-12-14 21:51:54  getResponse - recv: Success
+2019-12-14 21:51:54  getResponse - recv: Success
+2019-12-14 21:51:54  getResponse - recv: Success
+2019-12-14 21:51:54  getResponse - recv: Success
+2019-12-14 21:51:54  getResponse - recv: Success
+2019-12-14 21:51:54  watch_inbox - send LOGIN: Success
+2019-12-14 21:51:54  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:51:54  watch_inbox - send FETCH FLAGS: Success
+ÛM}ƒ] ×ˆ6Öuƒž  Á«\†§nŒ@ - send FETCH BODY HEADER: JçzË
+2019-12-14 21:51:54  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:55:29  connectHost - socket: Success
+2019-12-14 21:55:29  connectHost - inet_pton: Success
+2019-12-14 21:55:29  connectHost - connect: Success
+2019-12-14 21:55:29  connectHost - recv: Success
+2019-12-14 21:55:29  getResponse - recv: Success
+2019-12-14 21:55:29  getResponse - recv: Success
+2019-12-14 21:55:29  getResponse - recv: Success
+2019-12-14 21:55:29  getResponse - recv: Success
+2019-12-14 21:55:29  getResponse - recv: Success
+2019-12-14 21:55:29  watch_inbox - send LOGIN: Success
+2019-12-14 21:55:29  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:55:29  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:55:29  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:55:29  watch_inbox - send FETCH BODY: Success
+2019-12-14 21:56:41  connectHost - socket: Success
+2019-12-14 21:56:41  connectHost - inet_pton: Success
+2019-12-14 21:56:41  connectHost - connect: Success
+2019-12-14 21:56:41  connectHost - recv: Success
+2019-12-14 21:56:41  getResponse - recv: Success
+2019-12-14 21:56:41  getResponse - recv: Success
+2019-12-14 21:56:41  getResponse - recv: Success
+2019-12-14 21:56:41  getResponse - recv: Success
+2019-12-14 21:56:41  getResponse - recv: Success
+2019-12-14 21:56:41  watch_inbox - send LOGIN: Success
+2019-12-14 21:56:41  watch_inbox - send SELECT INBOX: Success
+2019-12-14 21:56:41  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 21:56:41  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 21:56:41  watch_inbox - send FETCH BODY: Success
+2019-12-14 22:00:48  connectHost - socket: Success
+2019-12-14 22:00:48  connectHost - inet_pton: Success
+2019-12-14 22:00:48  connectHost - connect: Success
+2019-12-14 22:00:48  connectHost - recv: Success
+2019-12-14 22:00:48  getResponse - recv: Success
+2019-12-14 22:00:48  getResponse - recv: Success
+2019-12-14 22:00:48  getResponse - recv: Success
+2019-12-14 22:00:48  getResponse - recv: Success
+2019-12-14 22:00:48  getResponse - recv: Success
+2019-12-14 22:00:48  watch_inbox - send LOGIN: Success
+2019-12-14 22:00:48  watch_inbox - send SELECT INBOX: Success
+2019-12-14 22:00:48  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 22:00:48  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 22:00:48  watch_inbox - send FETCH BODY: Success
+2019-12-14 22:02:30  connectHost - socket: Success
+2019-12-14 22:02:30  connectHost - inet_pton: Success
+2019-12-14 22:02:30  connectHost - connect: Success
+2019-12-14 22:02:30  connectHost - recv: Success
+2019-12-14 22:02:31  getResponse - recv: Success
+2019-12-14 22:02:31  getResponse - recv: Success
+2019-12-14 22:02:31  getResponse - recv: Success
+2019-12-14 22:02:31  getResponse - recv: Success
+2019-12-14 22:02:31  getResponse - recv: Success
+2019-12-14 22:02:30  watch_inbox - send LOGIN: Success
+2019-12-14 22:02:31  watch_inbox - send SELECT INBOX: Success
+2019-12-14 22:02:31  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 22:02:31  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 22:02:31  watch_inbox - send FETCH BODY: Success
+2019-12-14 22:02:40  connectHost - socket: Success
+2019-12-14 22:02:40  connectHost - inet_pton: Success
+2019-12-14 22:02:40  connectHost - connect: Success
+2019-12-14 22:02:40  connectHost - recv: Success
+2019-12-14 22:02:40  getResponse - recv: Success
+2019-12-14 22:02:40  getResponse - recv: Success
+2019-12-14 22:02:40  getResponse - recv: Success
+2019-12-14 22:02:40  getResponse - recv: Success
+2019-12-14 22:02:40  getResponse - recv: Success
+2019-12-14 22:02:40  watch_inbox - send LOGIN: Success
+2019-12-14 22:02:40  watch_inbox - send SELECT INBOX: Success
+2019-12-14 22:02:40  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 22:02:40  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 22:02:40  watch_inbox - send FETCH BODY: Success
+2019-12-14 22:05:03  connectHost - socket: Success
+2019-12-14 22:05:03  connectHost - inet_pton: Success
+2019-12-14 22:05:03  connectHost - connect: Success
+2019-12-14 22:05:03  connectHost - recv: Success
+2019-12-14 22:05:03  getResponse - recv: Success
+2019-12-14 22:05:03  getResponse - recv: Success
+2019-12-14 22:05:03  getResponse - recv: Success
+2019-12-14 22:05:03  getResponse - recv: Success
+2019-12-14 22:05:03  getResponse - recv: Success
+2019-12-14 22:05:03  watch_inbox - send LOGIN: Success
+2019-12-14 22:05:03  watch_inbox - send SELECT INBOX: Success
+2019-12-14 22:05:03  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 22:05:03  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 22:05:03  watch_inbox - send FETCH BODY: Success
+2019-12-14 22:06:43  connectHost - socket: Success
+2019-12-14 22:06:43  connectHost - inet_pton: Success
+2019-12-14 22:06:43  connectHost - connect: Success
+2019-12-14 22:06:43  connectHost - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  getResponse - recv: Success
+2019-12-14 22:06:43  sendmail - send TO: Success
+2019-12-14 22:06:43  sendmail - send DATA: Success
+2019-12-14 22:06:43  sendmail - send CONTENT: Success
+2019-12-14 22:06:43  sendmail - send QUIT: Success
+2019-12-14 22:06:43  login - send HELO: Success
+2019-12-14 22:06:43  login - send AUTH: Success
+2019-12-14 22:06:43  login - send username: Success
+2019-12-14 22:06:43  login - send password: Success
+2019-12-14 22:57:42  connectHost - socket: Success
+2019-12-14 22:57:42  connectHost - inet_pton: Success
+2019-12-14 22:57:42  connectHost - connect: Success
+2019-12-14 22:57:42  connectHost - recv: Success
+2019-12-14 22:57:42  getResponse - recv: Success
+2019-12-14 22:57:42  getResponse - recv: Success
+2019-12-14 22:57:42  getResponse - recv: Success
+2019-12-14 22:57:42  getResponse - recv: Success
+2019-12-14 22:57:42  getResponse - recv: Success
+2019-12-14 22:57:42  watch_inbox - send LOGIN: Success
+2019-12-14 22:57:42  watch_inbox - send SELECT INBOX: Success
+2019-12-14 22:57:42  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 22:57:42  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 22:57:42  watch_inbox - send FETCH BODY: Success
+2019-12-14 22:59:39  connectHost - socket: Success
+2019-12-14 22:59:39  connectHost - inet_pton: Success
+2019-12-14 22:59:39  connectHost - connect: Success
+2019-12-14 22:59:39  connectHost - recv: Success
+2019-12-14 22:59:39  getResponse - recv: Success
+2019-12-14 22:59:39  getResponse - recv: Success
+2019-12-14 22:59:39  getResponse - recv: Success
+2019-12-14 22:59:39  getResponse - recv: Success
+2019-12-14 22:59:39  getResponse - recv: Success
+2019-12-14 22:59:39  watch_inbox - send LOGIN: Success
+2019-12-14 22:59:39  watch_inbox - send SELECT INBOX: Success
+2019-12-14 22:59:39  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 22:59:39  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 22:59:39  watch_inbox - send FETCH BODY: Success
+2019-12-14 23:24:56  connectHost - socket: Success
+2019-12-14 23:24:56  connectHost - inet_pton: Success
+2019-12-14 23:24:56  connectHost - connect: Success
+2019-12-14 23:24:56  connectHost - recv: Success
+2019-12-14 23:24:56  getResponse - recv: Success
+2019-12-14 23:24:56  getResponse - recv: Success
+2019-12-14 23:24:56  getResponse - recv: Success
+2019-12-14 23:24:56  getResponse - recv: Success
+2019-12-14 23:24:56  getResponse - recv: Success
+2019-12-14 23:24:56  watch_inbox - send LOGIN: Success
+2019-12-14 23:24:56  watch_inbox - send SELECT INBOX: Success
+2019-12-14 23:24:56  watch_inbox - send FETCH FLAGS: Success
+2019-12-14 23:24:56  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-14 23:24:56  watch_inbox - send FETCH BODY: Success
+2019-12-14 23:25:16  connectHost - socket: Success
+2019-12-14 23:25:17  connectHost - inet_pton: Success
+2019-12-14 23:25:17  connectHost - connect: Success
+2019-12-14 23:25:17  connectHost - recv: Success
+2019-12-14 23:25:17  getResponse - recv: Success
+2019-12-14 23:25:17  getResponse - recv: Success
+2019-12-14 23:25:17  getResponse - recv: Success
+2019-12-14 23:25:17  getResponse - recv: Success
+2019-12-14 23:25:17  getResponse - recv: Success
+2019-12-14 23:25:17  getResponse - recv: Success
+2019-12-14 23:25:17  getResponse - recv: Success
+2019-12-14 23:25:17  login - send HELO: Success
+2019-12-14 23:25:17  login - send AUTH: Success
+2019-12-14 23:25:17  login - send username: Success
+2019-12-14 23:25:17  login - send password: Success
+2019-12-14 23:25:17  sendmail - send TO: Success
+2019-12-14 23:25:17  sendmail - send DATA: Success
+2019-12-14 23:25:51  connectHost - socket: Success
+2019-12-14 23:25:51  connectHost - inet_pton: Success
+2019-12-14 23:25:51  connectHost - connect: Success
+2019-12-14 23:25:51  connectHost - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  getResponse - recv: Success
+2019-12-14 23:25:51  sendmail - send TO: Success
+2019-12-14 23:25:51  sendmail - send DATA: Success
+2019-12-14 23:25:51  sendmail - send CONTENT: Success
+2019-12-14 23:25:51  sendmail - send QUIT: Success
+2019-12-14 23:25:51  login - send HELO: Success
+2019-12-14 23:25:51  login - send AUTH: Success
+2019-12-14 23:25:51  login - send username: Success
+2019-12-14 23:25:51  login - send password: Success
+2019-12-15 00:00:32  connectHost - socket: Success
+2019-12-15 00:00:32  connectHost - inet_pton: Success
+2019-12-15 00:00:32  connectHost - connect: Success
+2019-12-15 00:00:32  connectHost - recv: Success
+2019-12-15 00:00:33  getResponse - recv: Success
+2019-12-15 00:00:33  getResponse - recv: Success
+2019-12-15 00:00:33  getResponse - recv: Success
+2019-12-15 00:00:33  getResponse - recv: Success
+2019-12-15 00:00:33  getResponse - recv: Success
+2019-12-15 00:00:32  watch_inbox - send LOGIN: Success
+2019-12-15 00:00:33  watch_inbox - send SELECT INBOX: Success
+2019-12-15 00:00:33  watch_inbox - send FETCH FLAGS: Success
+2019-12-15 00:00:33  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-15 00:00:33  watch_inbox - send FETCH BODY: Success
+2019-12-15 00:01:36  connectHost - socket: Success
+2019-12-15 00:01:36  connectHost - inet_pton: Success
+2019-12-15 00:01:36  connectHost - connect: Success
+2019-12-15 00:01:38  connectHost - recv: Success
+2019-12-15 00:01:38  getResponse - recv: Success
+2019-12-15 00:01:38  getResponse - recv: Success
+2019-12-15 00:01:38  getResponse - recv: Success
+2019-12-15 00:01:38  getResponse - recv: Success
+2019-12-15 00:01:38  getResponse - recv: Success
+2019-12-15 00:01:38  getResponse - recv: Success
+2019-12-15 00:01:38  getResponse - recv: Success
+2019-12-15 00:01:38  getResponse - recv: Success
+2019-12-15 00:01:38  login - send HELO: Success
+2019-12-15 00:01:38  login - send AUTH: Success
+2019-12-15 00:01:38  login - send username: Success
+2019-12-15 00:01:38  login - send password: Success
+2019-12-15 00:01:38  sendmail - send TO: Success
+2019-12-15 00:01:38  sendmail - send DATA: Success
+2019-12-15 00:01:38  sendmail - send CONTENT: Success
+2019-12-15 00:02:58  connectHost - socket: Success
+2019-12-15 00:02:58  connectHost - inet_pton: Success
+2019-12-15 00:02:58  connectHost - connect: Success
+2019-12-15 00:02:58  connectHost - recv: Success
+2019-12-15 00:02:58  getResponse - recv: Success
+2019-12-15 00:02:58  getResponse - recv: Success
+2019-12-15 00:02:58  getResponse - recv: Success
+2019-12-15 00:02:58  getResponse - recv: Success
+2019-12-15 00:02:58  getResponse - recv: Success
+2019-12-15 00:02:58  getResponse - recv: Success
+2019-12-15 00:02:58  getResponse - recv: Success
+2019-12-15 00:02:58  getResponse - recv: Success
+2019-12-15 00:02:58  login - send HELO: Success
+2019-12-15 00:02:58  login - send AUTH: Success
+2019-12-15 00:02:58  login - send username: Success
+2019-12-15 00:02:58  login - send password: Success
+2019-12-15 00:02:58  sendmail - send TO: Success
+2019-12-15 00:02:58  sendmail - send DATA: Success
+2019-12-15 00:02:58  sendmail - send CONTENT: Success
+2019-12-15 00:05:08  connectHost - socket: Success
+2019-12-15 00:05:08  connectHost - inet_pton: Success
+2019-12-15 00:05:15  connectHost - connect: Success
+2019-12-15 00:05:18  connectHost - recv: Success
+2019-12-15 00:05:18  getResponse - recv: Success
+2019-12-15 00:05:18  getResponse - recv: Success
+2019-12-15 00:05:18  getResponse - recv: Success
+2019-12-15 00:05:18  getResponse - recv: Success
+2019-12-15 00:05:18  getResponse - recv: Success
+2019-12-15 00:05:18  getResponse - recv: Success
+2019-12-15 00:05:18  getResponse - recv: Success
+2019-12-15 14:46:49  connectHost - socket: Success
+2019-12-15 14:46:49  connectHost - inet_pton: Success
+2019-12-15 14:46:49  connectHost - connect: Success
+2019-12-15 14:46:49  connectHost - recv: Success
+2019-12-15 14:46:49  getResponse - recv: Success
+2019-12-15 14:46:49  getResponse - recv: Success
+2019-12-15 14:46:49  getResponse - recv: Success
+2019-12-15 14:46:49  getResponse - recv: Success
+2019-12-15 14:46:49  getResponse - recv: Success
+2019-12-15 14:46:49  watch_inbox - send LOGIN: Success
+2019-12-15 14:46:49  watch_inbox - send SELECT INBOX: Success
+2019-12-15 14:46:49  watch_inbox - send FETCH FLAGS: Success
+2019-12-15 14:46:49  watch_inbox - send FETCH BODY HEADER: Success
+2019-12-15 14:46:49  watch_inbox - send FETCH BODY: Success
+2019-12-15 14:47:12  connectHost - socket: Success
+2019-12-15 14:47:12  connectHost - inet_pton: Success
+2019-12-15 14:47:12  connectHost - connect: Success
+2019-12-15 14:47:12  connectHost - recv: Success
+2019-12-15 14:47:12  getResponse - recv: Success
+2019-12-15 14:47:12  getResponse - recv: Success
+2019-12-15 14:47:12  getResponse - recv: Success
+2019-12-15 14:47:12  getResponse - recv: Success
+2019-12-15 14:47:12  getResponse - recv: Success
+2019-12-15 14:47:12  getResponse - recv: Success
+2019-12-15 14:47:12  getResponse - recv: Success

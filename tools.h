@@ -1,13 +1,13 @@
 #include <unistd.h>
 #include <errno.h>
 #include <time.h>
-#include "sslconnect.h"
 #ifndef _TOOLS_H_ 
 #define _TOOLS_H_
 #define SOCKET_ERROR -1
 
 extern int errno;
-int ret;
+char buffer[1024];
+int sockfd, ret;
 char const *send_data;
 
 char* currentTime() {
@@ -22,26 +22,69 @@ char* currentTime() {
   return time_str;
 }
 
+int connectHost(const char *domain, int port) {
+  FILE* file = fopen("email.log", "a");
+  struct sockaddr_in servaddr;
+  sockfd = socket(AF_INET,SOCK_STREAM,0);
+  fprintf(file, "%s %s - socket: %s\n", currentTime(), __func__, strerror(errno));
+  if(sockfd < 0) {
+      perror("socket");
+      return -1;
+  }
+
+  bzero(&servaddr,sizeof(servaddr));
+  servaddr.sin_family = AF_INET;
+  servaddr.sin_port = htons(port);
+
+  ret = inet_pton(AF_INET, inet_ntoa(*(struct in_addr*)gethostbyname(domain)->h_addr_list[0]), &servaddr.sin_addr);
+  fprintf(file, "%s %s - inet_pton: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret < 0) {
+    perror("inet_pton");
+    return -1;
+  }
+
+  ret = connect(sockfd,(struct sockaddr *)&servaddr, sizeof(servaddr));
+  fprintf(file, "%s %s - connect: %s\n", currentTime(), __func__, strerror(errno));
+  if (ret < 0) {
+    perror("connect");
+    return -1;
+  }
+
+  memset(buffer, 0, sizeof(buffer));
+
+  ret = recv(sockfd, buffer, sizeof(buffer), 0);
+  fprintf(file, "%s %s - recv: %s\n", currentTime(), __func__, strerror(errno));
+  if(ret < 0) {
+    perror("recv");
+    return -1;
+  }
+  fclose(file);
+  return 0;
+}
+
 int getResponse() {
   FILE* file = fopen("email.log", "a");
   memset(buffer, 0, sizeof(buffer));
-  ret = SSL_read(ssl, buffer, 1024);
-  fprintf(file, "%s %s - recv: \n%s\n", currentTime(), __func__, buffer);
+  ret = recv(sockfd, buffer, 1024, 0);
+  fprintf(file, "%s %s - recv: %s\n", currentTime(), __func__, strerror(errno));
   if(ret == SOCKET_ERROR) {
     perror("recv");
     return -1;
   }
   buffer[ret]='\0';
-  if(*buffer == '5' || *buffer == '-') {
-    printf("%s\n", buffer);
+  if(*buffer == '5') {
+    printf("the order is not support smtp host，%s\n ",buffer);
+    return -1;
+  } else if (*buffer == '-') {
+    printf("the order is not support pop host，%s\n ",buffer);
     return -1;
   }
   fclose(file);
-//  printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n%s\n~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n", buffer);
+//  printf("%s\n", buffer);
   return 0;
 }
 
-int login(char* username,char* password) {
+int login(char* username,char* password){
   FILE* file = fopen("email.log", "a");
   char ch[100];
   if(username == "" || password == "") {
@@ -49,7 +92,7 @@ int login(char* username,char* password) {
   }
 
   send_data = "HELO 163.com\r\n";
-  ret = SSL_write(ssl, send_data, strlen(send_data));
+  ret = send(sockfd, send_data, strlen(send_data), 0);
   fprintf(file, "%s %s - send HELO: %s\n", currentTime(), __func__, strerror(errno));
   if(ret == SOCKET_ERROR) {
     perror("send HELO");
@@ -60,7 +103,7 @@ int login(char* username,char* password) {
   }
 
   send_data = "AUTH LOGIN\r\n";
-  ret = SSL_write(ssl, send_data, strlen(send_data));
+  ret = send(sockfd, send_data, strlen(send_data), 0);
   fprintf(file, "%s %s - send AUTH: %s\n", currentTime(), __func__, strerror(errno));
   if(ret == SOCKET_ERROR) {
     perror("send AUTH");
@@ -71,7 +114,7 @@ int login(char* username,char* password) {
   }
 
   sprintf(ch, "%s\r\n", username);
-  ret = SSL_write(ssl, (char *)ch, strlen(ch));
+  ret = send(sockfd, (char *)ch, strlen(ch),0);
   fprintf(file, "%s %s - send username: %s\n", currentTime(), __func__, strerror(errno));
   if(ret == SOCKET_ERROR) {
     perror("send username");
@@ -83,7 +126,7 @@ int login(char* username,char* password) {
   }
 
   sprintf(ch,"%s\r\n",password);
-  ret = SSL_write(ssl, (char *)ch, strlen(ch));
+  ret = send(sockfd,(char *)ch,strlen(ch),0);
   fprintf(file, "%s %s - send password: %s\n", currentTime(), __func__, strerror(errno));
   if(ret == SOCKET_ERROR) {
     perror("send password");
@@ -97,10 +140,12 @@ int login(char* username,char* password) {
 }
 
 void watch_help() {
-	printf("--inbox          Check inbox\n");
-	printf("-h               Help\n");
-	printf("--setuser        Set username and password\n");
-	printf("--send <target>  Send email to <target>\n");
+	//查看帮助
+	printf("---------------欢迎查看帮助文档---------------\n");
+    printf("            email inbox进入收件箱\n");
+    printf("            email -h查看帮助文档\n");
+    printf("            email setuser设定用户\n");
+    printf("            email send 目标邮箱 发送邮件\n");
 }
 
 int getNamePasswd(char name[], char passwd[]) {
@@ -110,7 +155,7 @@ int getNamePasswd(char name[], char passwd[]) {
       fscanf(fp, "%s\n%s", name, passwd);
   } else {
       //配置文件不存在，进入配置模块
-      printf("Error: No username or password. \"--setuser\" to set username and password\n");
+      printf("请先设定用户和密码--email setuser\n");
       return -1;
   }
   return 0;
@@ -244,17 +289,18 @@ char *base64_encode(const char* data){
 }
 
 //设置用户信息
-void setUser() {
-  printf("Username:");
+void setUser(){
+  printf("请输入账号:");
   char name[100],*passwd;
   scanf("%s",name);
   getchar();
-  passwd = getpass("Password:");
+  passwd = getpass("请输入密码:");
   char* base64_name = base64_encode(name);
   char* base64_passwd = base64_encode(passwd);
   FILE* fp = fopen("email.conf","w");
   fprintf(fp, "%s\n%s",base64_name,base64_passwd);
   fclose(fp);
+  printf("用户设置成功！");
 }
 
 #endif
