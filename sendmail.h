@@ -55,7 +55,7 @@ int sendmail(char* name, char* passwd, char* from, char* to, char* subject, char
     return -1;
   }
 
-  sprintf(Content,"from:%s\nto:%s\nsubject:%s\n%s\r\n.\r\n",from,to,subject,content);
+  sprintf(Content,"from:%s\nto:%s\nsubject:%s\n%s\r\n.\r\n",from,to,subject,base64_decode(content));
   ret = SSL_write(ssl, Content, strlen(Content));
   fprintf(file, "%s %s - send CONTENT: %s\n", currentTime(), __func__, strerror(errno));
   if(ret == SOCKET_ERROR) {
@@ -99,10 +99,11 @@ void send_mail(char* to){
   }
   content[p] = '\0';
 
+
   char name[100];
   char passwd[100];
   getNamePasswd(name,passwd);
   char* from = base64_decode(name);
-  sendmail(name,passwd,from, to, subject, content);
+  sendmail(name,passwd,from, to, subject, base64_encode(content));
 }
 #endif
