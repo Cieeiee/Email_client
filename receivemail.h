@@ -102,7 +102,7 @@ int watch_inbox() {
     }
     strtok(buffer,"\n");
     p = strtok(NULL,"\n");
-    printf("Content:\n%s\n",p);
+    printf("Content:\n%s\n",base64_decode(p));
 //    printf("Content:\n%s\n",base64_decode(p));
     printf("-------------------------------------\n");
   }
