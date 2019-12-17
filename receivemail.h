@@ -54,7 +54,7 @@ int watch_inbox() {
   for (i = 0; i < total; ++i) {
     sprintf(ch, "a003 fetch %d FLAGS\r\n", i + 1);
     ret = SSL_write(ssl, (char *)ch, strlen(ch));
-    printf("ch - %s\n", ch);
+//    printf("ch - %s\n", ch);
     fprintf(file, "%s %s - send FETCH FLAGS: %s\n", currentTime(), __func__, strerror(errno));
     if (ret == SOCKET_ERROR) {
       perror("send FETCH FLAGS");
@@ -67,6 +67,7 @@ int watch_inbox() {
     strtok(buffer,"(");
     strtok(NULL,"(");
     q = strtok(NULL,")");
+    if(strcmp(q, "\\Seen") != 0) q = "";
     printf("Email %d: (%s):\n", i + 1, q);
 
     sprintf(ch, "a003 fetch %d BODY[HEADER.FIELDS (DATE FROM TO SUBJECT)]\r\n", i + 1);
@@ -102,7 +103,7 @@ int watch_inbox() {
     }
     strtok(buffer,"\n");
     p = strtok(NULL,"\n");
-    printf("Content:\n%s\n",base64_decode(p));
+    printf("Content:\n%s\n",p);
 //    printf("Content:\n%s\n",base64_decode(p));
     printf("-------------------------------------\n");
   }
