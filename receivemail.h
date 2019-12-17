@@ -67,7 +67,11 @@ int watch_inbox() {
     strtok(buffer,"(");
     strtok(NULL,"(");
     q = strtok(NULL,")");
-    if(strcmp(q, "\\Seen") != 0) q = "";
+    if(strcmp(q, "\\Seen") != 0&&
+       strcmp(q, "\\Flagged") != 0&&
+       strcmp(q, "\\Answered") != 0&&
+       strcmp(q, "\\Deleted") != 0&&
+       strcmp(q, "\\Draft") != 0) q = "\\Unread";
     printf("Email %d: (%s):\n", i + 1, q);
 
     sprintf(ch, "a003 fetch %d BODY[HEADER.FIELDS (DATE FROM TO SUBJECT)]\r\n", i + 1);
